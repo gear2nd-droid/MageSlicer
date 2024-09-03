@@ -14,11 +14,19 @@ NURBS曲面の造形物を多数のNURBS曲面でスライスします。この�
 
 ## 環境設定方法
 使用しているライブラリはvcpkgでインストール可能です。
+VisualStudioをインストール後に、コマンドプロンプトでvcpkgをインストールしてください。
+なお、Gitのインストールにはコマンドプロンプトを管理者として実行することが必要です。
 ```
+winget install --scope machine Git.Git
+powershell -command "$oldpath = [System.Environment]::GetEnvironmentVariable(\"Path\", \"Machine\"); $oldpath += \";c:\Program Files\Git\cmd\"; [System.Environment]::SetEnvironmentVariable(\"Path\", $oldpath, \"Machine\")"
+
 cd c:\
 rmdir /s /q vcpkg
 git clone https://github.com/microsoft/vcpkg
 cd c:\vcpkg
 git pull
 .\bootstrap-vcpkg.bat
+
+.\vcpkg install opencascade
+.\vcpkg install clipper2
 ```
