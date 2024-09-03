@@ -46,3 +46,10 @@ git pull
 .\vcpkg install opencascade
 .\vcpkg install clipper2
 ```
+
+MageSlicer.slnを起動し、OCCTProxyを右クリックしてプロパティ。
+構成プロパティ>vcpkg>General>Use Vcpkgを「はい」に設定する。
+
+いくつかのファイルで「AboutDialog.resx を処理できませんでした。インターネットまたは制限付きゾーン内にあるか、ファイルに Web のマークがあるためです。これらのファイルを処理するには、Web のマークを削除してください。」というエラーがでます。
+エクスプローラで該当のファイルを右クリックしプロパティ。
+全般>セキュリティ>許可するに「チェック」を入れてください。
