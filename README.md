@@ -41,6 +41,7 @@ git clone https://github.com/microsoft/vcpkg
 cd c:\vcpkg
 git pull
 .\bootstrap-vcpkg.bat
+.\vcpkg.exe integrate install
 
 .\vcpkg install opencascade
 .\vcpkg install clipper2
