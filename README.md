@@ -12,3 +12,13 @@ NURBS曲面の造形物を多数のNURBS曲面でスライスします。この�
 
 ・[Clipper2](https://github.com/AngusJohnson/Clipper2)
 
+## 環境設定方法
+使用しているライブラリはvcpkgでインストール可能です。
+```
+cd c:\
+rmdir /s /q vcpkg
+git clone https://github.com/microsoft/vcpkg
+cd c:\vcpkg
+git pull
+.\bootstrap-vcpkg.bat
+```
