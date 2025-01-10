@@ -25,18 +25,23 @@ MAGE slicerでは現在1(+1)種類のスライス方式に対応しています�
 外皮のみを一層と見立ててスライスします。
 そのため、一般的な3Dプリンタでは水平面内を鉛直方向に積層していくだけですが、その積層面間を接続するような新たな面を造形することができます。
 
+# 実装済み機能
+- 中空:内部に空洞を有した造形物を作成可能です。
+- 複数層の壁:外壁および内壁を複数層とすることができます。
+- インフィル:インフィルを作成することができます。インフィルはXYZ空間基準とNURBS曲面内のUV空間基準で作成することができます。
+- オーバーハング箇所の補間:レイヤー間で急激にスライス形状が変化した箇所では、隙間が発生してしまうことがあります。この隙間を埋める機能があります。
+
 # 使用方法
 MAGE slicerでは、スライスしてGコードを直接生成するわけではなく、Gコードを生成するための情報を集めた中間ファイルを生成します。
 その中間ファイルをMAGE simulatorに読み込むことで、多軸3Dプリンタの機構を考慮したGコードへの変換と、衝突検出処理を行います。
 ポストプロセッサとシミュレータをあえて別に切り離しているのは、多軸の3Dプリンタには様々な機構があることに加え、まだ開発段階のものであり仕様が未確定で頻繁に変更が発生するため、改善を容易にするためです。
 
 # 開発環境
-・Visual Studio Community 2022 (17.10.5)
+- Visual Studio Community 2022 (17.10.5)
 
 ## 使用ライブラリ
-・[OpenCASCADE](https://dev.opencascade.org/)
-
-・[Clipper2](https://github.com/AngusJohnson/Clipper2)
+- [OpenCASCADE](https://dev.opencascade.org/)
+- [Clipper2](https://github.com/AngusJohnson/Clipper2)
 
 ## 環境設定方法
 使用しているライブラリはvcpkgでインストール可能です。
@@ -64,3 +69,38 @@ MageSlicer.slnを起動し、OCCTProxyを右クリックしてプロパティ。
 いくつかのファイルで「AboutDialog.resx を処理できませんでした。インターネットまたは制限付きゾーン内にあるか、ファイルに Web のマークがあるためです。これらのファイルを処理するには、Web のマークを削除してください。」というエラーがでます。
 エクスプローラで該当のファイルを右クリックしプロパティ。
 全般>セキュリティ>許可するに「チェック」を入れてください。
+
+# 中間ファイル
+出力される中間ファイルはヘッダがないcsvファイルです。この中間ファイルを[MAGE Interface](https://github.com/gear2nd-droid/MageSimulator)でGコードに変換して3Dプリンタを動かします。
+
+## フォーマット
+1. 種類(Type)
+2. X座標(X)
+3. Y座標(Y)
+4. Z座標(Z)
+5. 法線ベクトルのX成分(I)
+6. 法線ベクトルのY成分(J)
+7. 法線ベクトルのZ成分(K)
+8. 厚み(Thickness)
+9. 幅(Width)
+10. ボリュームID
+11. レイヤーID
+12. ループID
+13. カーブID
+14. NURBS曲面のUパラメータ
+15. NURBS曲面のVパラメータ
+
+## 種類
+11. OuterWallMiddle
+12. OuterWallStart
+13. OuterWallEnd
+21. InnerWallMiddle
+22. InnerWallStart
+23. InnerWallEnd
+31. InfillMiddle
+32. InfillStart
+33. InfillEnd
+41. SupportMiddle
+42. SupportStart
+43. SupportEnd
+51. Saving
