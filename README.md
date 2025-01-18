@@ -133,6 +133,7 @@ MageSlicer.slnを起動し、OCCTProxyを右クリックしてプロパティ。
 # 入力データ
 スライス対象物をSTEPファイルで、スライスに用いるNURBS曲面をCSVファイルで読み込みます。
 このうち、CSVファイルは独自フォーマットとなっています。
+また、スライス設定はXMLファイルでプロジェクトとして保存することができます。
 
 ## CSVファイルのフォーマット
 NURBS曲面は、UV方向に配列された点群の座標から生成することができます。
@@ -171,3 +172,24 @@ NURBS曲面は、UV方向に配列された点群の座標から生成するこ�
 83.000,83.000,83.000,83.000
 // でコメントを記載しましたが、コメントは非対応です。
 ```
+
+## XMLファイルのフォーマット
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<Project>
+  <Targets>
+    <Target Path="C:\test\bottom_sandwich_test.stp" RotAngle="0" RotCenterX="0" RotCenterY="0" RotCenterZ="0" RotDirectionX="0" RotDirectionY="0" RotDirectionZ="1" TransX="0" TransY="0" TransZ="0" />
+    <Target Path="C:\test\piller_test.stp" RotAngle="0" RotCenterX="0" RotCenterY="0" RotCenterZ="0" RotDirectionX="0" RotDirectionY="0" RotDirectionZ="1" TransX="0" TransY="0" TransZ="0" />
+  </Targets>
+  <Surfaces>
+    <Surface Path="C:\test\bottom.csv" RotAngle="0" RotCenterX="0" RotCenterY="0" RotCenterZ="0" RotDirectionX="0" RotDirectionY="0" RotDirectionZ="1" TransX="0" TransY="0" TransZ="0" />
+    <Surface Path="C:\test\upper.csv" RotAngle="0" RotCenterX="0" RotCenterY="0" RotCenterZ="0" RotDirectionX="0" RotDirectionY="0" RotDirectionZ="1" TransX="0" TransY="0" TransZ="0" />
+  </Surfaces>
+  <Volumes>
+    <Volume Type="Bottom" TargetId="0" SurfaceId="0" Direction="0" Thickness = "0.4"/><!--Directionは、0:U方向から90度、1:U方向から0度、2:U方向から45度、3:U方向から-45度の傾きの平行線で、外層と内層の間を埋めます。-->
+    <Volume Type="Sandwich" TargetId="0" LowerId="0" UpperId="1" Pitch="0.15" /><!--Pitchは生成する補間曲面の間隔を決めるパラメータであって、この値が厳密な間隔になるわけではありません。-->
+    <Volume Type="Piller" TargetId="1" Thickness="0.4" Direction="0" /><!--Directionは、0:U方向から45度、1:V方向から-45度の傾きの平行線で、層を埋めます。-->
+  </Volumes>
+</Project>
+```
+
