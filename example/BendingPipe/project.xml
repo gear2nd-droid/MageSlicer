@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project>
+  <Targets>
+    <Target Path="{path}\tube.stp" RotAngle="0" RotCenterX="0" RotCenterY="0" RotCenterZ="0" RotDirectionX="0" RotDirectionY="0" RotDirectionZ="1" TransX="0" TransY="0" TransZ="0" />
+  </Targets>
+  <Surfaces>
+    <Surface Path="{path}\11.csv" RotAngle="0" RotCenterX="0" RotCenterY="0" RotCenterZ="0" RotDirectionX="0" RotDirectionY="0" RotDirectionZ="1" TransX="0" TransY="0" TransZ="0" />
+    <Surface Path="{path}\12.csv" RotAngle="0" RotCenterX="0" RotCenterY="0" RotCenterZ="0" RotDirectionX="0" RotDirectionY="0" RotDirectionZ="1" TransX="0" TransY="0" TransZ="0" />
+    <Surface Path="{path}\13.csv" RotAngle="0" RotCenterX="0" RotCenterY="0" RotCenterZ="0" RotDirectionX="0" RotDirectionY="0" RotDirectionZ="1" TransX="0" TransY="0" TransZ="0" />
+  </Surfaces>
+  <Volumes>
+    <Volume Type="Sandwich" TargetId="0" LowerId="0" UpperId="1" Pitch="0.2" />
+    <Volume Type="Sandwich" TargetId="0" LowerId="1" UpperId="2" Pitch="0.2" />
+  </Volumes>
+</Project>
