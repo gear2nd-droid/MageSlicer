@@ -201,10 +201,10 @@ public:
     array<int>^ surfaceIdx, array<int>^ wallIdx, array<int>^ infillIdx, array<int>^ supportIdx,
     int volumeGeomid, int geomIdBase, double checkDist,
     int surfaceR, int surfaceG, int surfaceB);
-  int OCCTProxy::calcPillerLayer(
+  int OCCTProxy::calcPeelerLayer(
     array<int>^ surfaceIdx, array<int>^ wallIdx, array<int>^ infillIdx, array<int>^ supportIdx);
-  int OCCTProxy::calcPillerPoints(char* path, double pointsDistance, double width, double thick,
-    array<int>^ wallIdx, int pillerGeomid, int volumeCnt, bool flag,
+  int OCCTProxy::calcPeelerPoints(char* path, double pointsDistance, double width, double thick,
+    array<int>^ wallIdx, int peelerGeomid, int volumeCnt, bool flag,
     double prePointX, double prePointY, double prePointZ,
     double& lastPointX, double& lastPointY, double& lastPointZ,
     double preNormI, double preNormJ, double preNormK,

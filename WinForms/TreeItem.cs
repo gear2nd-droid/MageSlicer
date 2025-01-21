@@ -88,7 +88,7 @@ namespace IE_WinForms
     Sandwich,
     Bottom,
     AutoSlice,
-    Piller
+    Peeler
   }
 
   public class TreeItem
@@ -105,7 +105,7 @@ namespace IE_WinForms
     BottomSurface,
     BottomVolume,
     AutoSliceVolume,
-    PillerSurface
+    PeelerSurface
   }
 
   public class GeometryNode : TreeNode
@@ -238,20 +238,20 @@ namespace IE_WinForms
     }
   }
 
-  public class PillerItem: TreeItem
+  public class PeelerItem: TreeItem
   {
     public GeometryNode Volume { get; set; }
     public double Thickness { get; set; }
     public int Direction { get; set; }
-    public PillerItem() 
+    public PeelerItem() 
     { 
-      this.NodeType = NodeType.Piller;
+      this.NodeType = NodeType.Peeler;
       this.SliceType = new TreeNode();
-      this.SliceType.Text = "Piller";
+      this.SliceType.Text = "Peeler";
       this.SliceType.ForeColor = Color.Black;
       this.Volume = new GeometryNode();
       this.Volume.Text = "Volume";
-      this.Volume.Type = NodePartType.PillerSurface;
+      this.Volume.Type = NodePartType.PeelerSurface;
       this.Volume.ForeColor = Color.Black;
       this.SliceType.Nodes.Add(this.Volume);
       this.SliceType.Expand();

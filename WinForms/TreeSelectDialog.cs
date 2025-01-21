@@ -27,7 +27,7 @@ namespace IE_WinForms
       this.comboBox.Items.Add("Sandwich");
       this.comboBox.Items.Add("Bottom");
       this.comboBox.Items.Add("AutoSlice");
-      this.comboBox.Items.Add("Piller");
+      this.comboBox.Items.Add("Peeler");
       switch(item.NodeType)
       {
         case NodeType.Sandwich:
@@ -39,7 +39,7 @@ namespace IE_WinForms
         case NodeType.AutoSlice:
           this.comboBox.SelectedItem = 2;
           break;
-        case NodeType.Piller:
+        case NodeType.Peeler:
           this.comboBox.SelectedItem = 3;
           break;
       }
@@ -60,7 +60,7 @@ namespace IE_WinForms
           selected = NodeType.AutoSlice;
           break;
         case 3:
-          selected = NodeType.Piller;
+          selected = NodeType.Peeler;
           break;
       }
       if(item.NodeType != selected)
@@ -82,9 +82,9 @@ namespace IE_WinForms
             this.item.SliceType.Text = "AutoSlice";
             this.tree.AddAutoSliceItem(idx);
             break;
-          case NodeType.Piller:
-            this.item.SliceType.Text = "Piller";
-            this.tree.AddPillerItem(idx);
+          case NodeType.Peeler:
+            this.item.SliceType.Text = "Peeler";
+            this.tree.AddPeelerItem(idx);
             break;
         }
       }

@@ -51,8 +51,8 @@ namespace IE_WinForms
             this.dataGridView.Rows.Add("Node type", "AutoSlice");
             this.dataGridView.Rows.Add("Geometry type", "Target");
             break;
-          case NodePartType.PillerSurface:
-            this.dataGridView.Rows.Add("Node type", "Piller");
+          case NodePartType.PeelerSurface:
+            this.dataGridView.Rows.Add("Node type", "Peeler");
             this.dataGridView.Rows.Add("Geometry type", "Target");
             break;
         }
@@ -109,9 +109,9 @@ namespace IE_WinForms
           AutoSliceItem item = (AutoSliceItem)this.datatree.items[idx];
           this.dataGridView.Rows.Add("Thickness", item.Thickness);
         }
-        else if(this.datatree.items[idx] is PillerItem)
+        else if(this.datatree.items[idx] is PeelerItem)
         {
-          PillerItem item = (PillerItem)this.datatree.items[idx];
+          PeelerItem item = (PeelerItem)this.datatree.items[idx];
           this.dataGridView.Rows.Add("Thickness", item.Thickness);
           switch(item.Direction)
           {

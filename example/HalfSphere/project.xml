@@ -10,6 +10,6 @@
   </Surfaces>
   <Volumes>
     <Volume Type="Sandwich" TargetId="0" LowerId="0" UpperId="1" Pitch="0.3" />
-    <Volume Type="Piller" TargetId="1" Thickness="0.4" Direction="0" />
+    <Volume Type="Peeler" TargetId="1" Thickness="0.4" Direction="0" />
   </Volumes>
 </Project>

@@ -1282,7 +1282,7 @@ int OCCTProxy::calcAutoSliceLayer(
   return layerCnt;
 }
 
-int OCCTProxy::calcPillerLayer(
+int OCCTProxy::calcPeelerLayer(
   array<int>^ surfaceIdx, array<int>^ wallIdx, array<int>^ infillIdx, array<int>^ supportIdx)
 {
   int bufIdx = -(0 + 1 + preSliceStartLayer) * IDX_PATERN;
@@ -1293,8 +1293,8 @@ int OCCTProxy::calcPillerLayer(
   return 1;
 }
 
-int OCCTProxy::calcPillerPoints(char* path, double pointsDistance, double width, double thick, 
-  array<int>^ wallIdx, int pillerGeomid, int volumeCnt, bool flag,
+int OCCTProxy::calcPeelerPoints(char* path, double pointsDistance, double width, double thick,
+  array<int>^ wallIdx, int peelerGeomid, int volumeCnt, bool flag,
   double prePointX, double prePointY, double prePointZ,
   double& lastPointX, double& lastPointY, double& lastPointZ,
   double preNormI, double preNormJ, double preNormK,
@@ -1309,8 +1309,8 @@ int OCCTProxy::calcPillerPoints(char* path, double pointsDistance, double width,
   std::cin.clear();
   freopen_s(&fpc, "CONOUT$", "w", stderr);
   std::cerr.clear();
-  // piller
-  Handle(Geom_BSplineSurface) piller;
+  // peeler
+  Handle(Geom_BSplineSurface) peeler;
   TopoDS_Face face;
   std::vector<PointData> list;
   int layerCnt = -1;
@@ -1319,25 +1319,25 @@ int OCCTProxy::calcPillerPoints(char* path, double pointsDistance, double width,
   gp_Dir preNorm = gp_Dir(preNormI, preNormJ, preNormK);
   for (int i = 0; i < myObj->getLength(); i++) 
   {
-    if (myObj->geomids[i] == pillerGeomid)
+    if (myObj->geomids[i] == peelerGeomid)
     {
       layerCnt++;
-      std::cout << "piller layer:" << layerCnt << std::endl;
-      piller = myObj->surfaces[i];
+      std::cout << "peeler layer:" << layerCnt << std::endl;
+      peeler = myObj->surfaces[i];
       face = myObj->faces[i];
       BRepTopAdaptor_FClass2d checkFace(face, Precision::Confusion());
-      double bufPillerUmin, bufPillerUmax, bufPillerVmin, bufPillerVmax;
-      piller.get()->Bounds(bufPillerUmin, bufPillerUmax, bufPillerVmin, bufPillerVmax);
-      gp_Pnt pnt0 = piller.get()->Value(bufPillerUmin, bufPillerVmin);
-      gp_Pnt pnt1 = piller.get()->Value(bufPillerUmax, bufPillerVmin);
-      gp_Pnt pnt2 = piller.get()->Value(bufPillerUmax, bufPillerVmax);
-      gp_Pnt pnt3 = piller.get()->Value(bufPillerUmin, bufPillerVmax);
+      double bufPeelerUmin, bufPeelerUmax, bufPeelerVmin, bufPeelerVmax;
+      peeler.get()->Bounds(bufPeelerUmin, bufPeelerUmax, bufPeelerVmin, bufPeelerVmax);
+      gp_Pnt pnt0 = peeler.get()->Value(bufPeelerUmin, bufPeelerVmin);
+      gp_Pnt pnt1 = peeler.get()->Value(bufPeelerUmax, bufPeelerVmin);
+      gp_Pnt pnt2 = peeler.get()->Value(bufPeelerUmax, bufPeelerVmax);
+      gp_Pnt pnt3 = peeler.get()->Value(bufPeelerUmin, bufPeelerVmax);
       double dist01 = pnt0.Distance(pnt1);
       double dist12 = pnt1.Distance(pnt2);
       double dist23 = pnt2.Distance(pnt3);
       double dist30 = pnt3.Distance(pnt0);
-      double uv01 = bufPillerUmax - bufPillerUmin;
-      double uv12 = bufPillerVmax - bufPillerVmin;
+      double uv01 = bufPeelerUmax - bufPeelerUmin;
+      double uv12 = bufPeelerVmax - bufPeelerVmin;
       double uv23 = uv01;
       double uv30 = uv12;
       double scale = (dist01 / uv01 + dist12 / uv12 + dist23 / uv23 + dist30 / uv30) / 4.0;
@@ -1349,59 +1349,59 @@ int OCCTProxy::calcPillerPoints(char* path, double pointsDistance, double width,
       double stu, stv, edu, edv;
       double bufstu, bufstv, bufedu, bufedv;
 
-      stu = bufPillerUmin;
-      stv = bufPillerVmin;
-      edu = bufPillerUmin;
-      edv = bufPillerVmin;
-      while (stu < bufPillerUmax || stv < bufPillerVmax || edu < bufPillerUmax || edv < bufPillerVmax)
+      stu = bufPeelerUmin;
+      stv = bufPeelerVmin;
+      edu = bufPeelerUmin;
+      edv = bufPeelerVmin;
+      while (stu < bufPeelerUmax || stv < bufPeelerVmax || edu < bufPeelerUmax || edv < bufPeelerVmax)
       {
         if (loopCnt % 2 == 0)
         {
-          stu = bufPillerUmin;
-          stv = bufPillerVmin + loopCnt * pitch;
-          edu = bufPillerUmin + loopCnt * pitch;
-          edv = bufPillerVmin;
-          if (stv > bufPillerVmax)
+          stu = bufPeelerUmin;
+          stv = bufPeelerVmin + loopCnt * pitch;
+          edu = bufPeelerUmin + loopCnt * pitch;
+          edv = bufPeelerVmin;
+          if (stv > bufPeelerVmax)
           {
-            stu = stv - bufPillerVmax + bufPillerUmin;
-            stv = bufPillerVmax;
-            if (stu > bufPillerUmax)
+            stu = stv - bufPeelerVmax + bufPeelerUmin;
+            stv = bufPeelerVmax;
+            if (stu > bufPeelerUmax)
             {
-              stu = bufPillerUmax;
+              stu = bufPeelerUmax;
             }
           }
-          if (edu > bufPillerUmax)
+          if (edu > bufPeelerUmax)
           {
-            edv = edu - bufPillerUmax + bufPillerVmin;
-            edu = bufPillerUmax;
-            if (edv > bufPillerVmax)
+            edv = edu - bufPeelerUmax + bufPeelerVmin;
+            edu = bufPeelerUmax;
+            if (edv > bufPeelerVmax)
             {
-              edv = bufPillerVmax;
+              edv = bufPeelerVmax;
             }
           }
         }
         else
         {
-          stu = bufPillerUmin + loopCnt * pitch;
-          stv = bufPillerVmin;
-          edu = bufPillerUmin;
-          edv = bufPillerVmin + loopCnt * pitch;
-          if (stu > bufPillerUmax)
+          stu = bufPeelerUmin + loopCnt * pitch;
+          stv = bufPeelerVmin;
+          edu = bufPeelerUmin;
+          edv = bufPeelerVmin + loopCnt * pitch;
+          if (stu > bufPeelerUmax)
           {
-            stv = stu - bufPillerUmax + bufPillerVmin;
-            stu = bufPillerUmax;
-            if (stv > bufPillerVmax)
+            stv = stu - bufPeelerUmax + bufPeelerVmin;
+            stu = bufPeelerUmax;
+            if (stv > bufPeelerVmax)
             {
-              stv = bufPillerVmax;
+              stv = bufPeelerVmax;
             }
           }
-          if (edv > bufPillerVmax)
+          if (edv > bufPeelerVmax)
           {
-            edu = edv - bufPillerVmax + bufPillerUmin;
-            edv = bufPillerVmax;
-            if (edu > bufPillerUmax)
+            edu = edv - bufPeelerVmax + bufPeelerUmin;
+            edv = bufPeelerVmax;
+            if (edu > bufPeelerUmax)
             {
-              edu = bufPillerUmax;
+              edu = bufPeelerUmax;
             }
           }
         }
@@ -1414,9 +1414,9 @@ int OCCTProxy::calcPillerPoints(char* path, double pointsDistance, double width,
         }
         else
         {
-          bufstu = bufPillerUmax + bufPillerUmin - stu;
+          bufstu = bufPeelerUmax + bufPeelerUmin - stu;
           bufstv = stv;
-          bufedu = bufPillerUmax + bufPillerUmin - edu;
+          bufedu = bufPeelerUmax + bufPeelerUmin - edu;
           bufedv = edv;
         }
         double dist = sqrt((bufedu - bufstu) * (bufedu - bufstu) + (bufedv - bufstv) * (bufedv - bufstv));
@@ -1433,7 +1433,7 @@ int OCCTProxy::calcPillerPoints(char* path, double pointsDistance, double width,
             if (j == 0)
             {
               PointData item = calcPointData_uv(
-                uv, piller, thick, PrintType::OuterWallStart, width, volumeCnt, layerCnt, loopCnt, 0, preNorm);
+                uv, peeler, thick, PrintType::OuterWallStart, width, volumeCnt, layerCnt, loopCnt, 0, preNorm);
               preNorm = item.norm;
               list.push_back(item);
               prePnt = item.pnt;
@@ -1441,7 +1441,7 @@ int OCCTProxy::calcPillerPoints(char* path, double pointsDistance, double width,
             else
             {
               PointData item = calcPointData_uv(
-                uv, piller, thick, PrintType::OuterWallMiddle, width, volumeCnt, layerCnt, loopCnt, 0, preNorm);
+                uv, peeler, thick, PrintType::OuterWallMiddle, width, volumeCnt, layerCnt, loopCnt, 0, preNorm);
               preNorm = item.norm;
               list.push_back(item);
               nowPnt = item.pnt;
@@ -1468,7 +1468,7 @@ int OCCTProxy::calcPillerPoints(char* path, double pointsDistance, double width,
         {
           std::pair<double, double> uv = std::pair<double, double>(edu, edv);
           PointData item = calcPointData_uv(
-            uv, piller, thick, PrintType::OuterWallEnd, width, volumeCnt, layerCnt, loopCnt, 0, preNorm);
+            uv, peeler, thick, PrintType::OuterWallEnd, width, volumeCnt, layerCnt, loopCnt, 0, preNorm);
           preNorm = item.norm;
           list.push_back(item);
           nowPnt = item.pnt;

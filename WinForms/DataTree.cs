@@ -107,16 +107,16 @@ namespace IE_WinForms
       this.treeView.Nodes.Insert(idx, buf.SliceType);
     }
 
-    public void AddPillerItem()
+    public void AddPeelerItem()
     {
-      PillerItem buf = new PillerItem();
+      PeelerItem buf = new PeelerItem();
       this.items.Add(buf);
       this.treeView.Nodes.Add(buf.SliceType);
     }
 
-    public void AddPillerItem(int idx)
+    public void AddPeelerItem(int idx)
     {
-      PillerItem buf = new PillerItem();
+      PeelerItem buf = new PeelerItem();
       this.items.Add(buf);
       this.treeView.Nodes.Insert(idx, buf.SliceType);
     }
@@ -293,10 +293,10 @@ namespace IE_WinForms
           AutoSliceItem autoItem = (AutoSliceItem)this.items[idx];
           dialog = new GeometryImportDialog(copyNode, this.geoms, autoItem.Thickness, 0);
         }
-        else if(this.items[idx] is PillerItem)
+        else if(this.items[idx] is PeelerItem)
         {
-          PillerItem pillerItem = (PillerItem)this.items[idx];
-          dialog = new GeometryImportDialog(copyNode, this.geoms, pillerItem.Thickness, pillerItem.Direction);
+          PeelerItem peelerItem = (PeelerItem)this.items[idx];
+          dialog = new GeometryImportDialog(copyNode, this.geoms, peelerItem.Thickness, peelerItem.Direction);
         }
         if(dialog.ShowDialog() == DialogResult.OK)
         {
@@ -427,11 +427,11 @@ namespace IE_WinForms
               AutoSliceItem autoItem = (AutoSliceItem)this.items[idx];
               autoItem.Thickness = dialog.Pitch;
             }
-            else if(this.items[idx] is PillerItem)
+            else if(this.items[idx] is PeelerItem)
             {
-              PillerItem pillerItem = (PillerItem)this.items[idx];
-              pillerItem.Thickness = dialog.Pitch;
-              pillerItem.Direction = dialog.Direction;
+              PeelerItem peelerItem = (PeelerItem)this.items[idx];
+              peelerItem.Thickness = dialog.Pitch;
+              peelerItem.Direction = dialog.Direction;
             }
           }
         }
@@ -492,7 +492,7 @@ namespace IE_WinForms
               GeometryNode volume = (GeometryNode)this.treeView.Nodes[i].Nodes[0];
               volume.ForeColor = volume.Geometry.Color;
             }
-            else if(item is PillerItem)
+            else if(item is PeelerItem)
             {
               GeometryNode volume = (GeometryNode)this.treeView.Nodes[i].Nodes[0];
               volume.ForeColor = volume.Geometry.Color;
@@ -592,7 +592,7 @@ namespace IE_WinForms
         {
           nodeTarget = (GeometryNode)this.treeView.Nodes[i].Nodes[0];
         }
-        else if(this.items[i] is PillerItem)
+        else if(this.items[i] is PeelerItem)
         {
           nodeTarget = (GeometryNode)this.treeView.Nodes[i].Nodes[0];
         }
@@ -684,10 +684,10 @@ namespace IE_WinForms
           volume.SetAttribute("TargetId", dicTarget[item.Volume.Geometry].ToString());
           volume.SetAttribute("Thickness", item.Thickness.ToString());
         }
-        else if(bufItem is PillerItem)
+        else if(bufItem is PeelerItem)
         {
-          PillerItem item = (PillerItem)bufItem;
-          volume.SetAttribute("Type", "Piller");
+          PeelerItem item = (PeelerItem)bufItem;
+          volume.SetAttribute("Type", "Peeler");
           volume.SetAttribute("TargetId", dicTarget[item.Volume.Geometry].ToString());
           volume.SetAttribute("Thickness", item.Thickness.ToString());
           volume.SetAttribute("Direction", item.Direction.ToString());
@@ -868,9 +868,9 @@ namespace IE_WinForms
           item.Volume.IsExist = true;
           item.Thickness = double.Parse(volume.GetAttribute("Thickness"));
         }
-        else if(volume.GetAttribute("Type") == "Piller")
+        else if(volume.GetAttribute("Type") == "Peeler")
         {
-          PillerItem item = new PillerItem();
+          PeelerItem item = new PeelerItem();
           // tree
           this.treeView.Nodes.Add(item.SliceType);
           // item

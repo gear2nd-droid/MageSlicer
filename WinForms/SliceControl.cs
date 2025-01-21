@@ -308,16 +308,16 @@ namespace IE_WinForms
             this.supportIdx[vol].Add(subSupportIdx[idx]);
           }
         }
-        else if(bufItem is PillerItem)
+        else if(bufItem is PeelerItem)
         {
-          PillerItem item = (PillerItem)bufItem;
+          PeelerItem item = (PeelerItem)bufItem;
           int surafaceGeomid = item.Volume.Geometry.Geomid;
           int[] subSurfaceIdx = new int[1];
           int[] subWallIdx = new int[1];
           int[] subInfillIdx = new int[1];
           int[] subSupportIdx = new int[1];
           this.IsPreSliceDone = true;
-          int outLayerCount = this.view.myOCCTProxy.calcPillerLayer(
+          int outLayerCount = this.view.myOCCTProxy.calcPeelerLayer(
             subSurfaceIdx, subWallIdx, subInfillIdx, subSupportIdx);
           // array
           this.volumeLayerCnt[vol] = outLayerCount;
@@ -499,7 +499,7 @@ namespace IE_WinForms
           else if(bufItem is AutoSliceItem)
           {
           }
-          else if(bufItem is PillerItem)
+          else if(bufItem is PeelerItem)
           {
           }
         }
@@ -600,10 +600,10 @@ namespace IE_WinForms
           {
 
           }
-          else if(bufItem is PillerItem)
+          else if(bufItem is PeelerItem)
           {
-            PillerItem item = (PillerItem)bufItem;
-            int pillerGeomid = item.Volume.Geometry.Geomid;
+            PeelerItem item = (PeelerItem)bufItem;
+            int peelerGeomid = item.Volume.Geometry.Geomid;
             // points
             double lastX, lastY, lastZ, lastI, lastJ, lastK;
             IntPtr ptr = Marshal.StringToHGlobalAnsi(this.slice.Path);
@@ -611,9 +611,9 @@ namespace IE_WinForms
             {
               bool flag = true;
               if(item.Direction != 0) flag = false;
-              this.view.myOCCTProxy.calcPillerPoints(
+              this.view.myOCCTProxy.calcPeelerPoints(
                 (sbyte*)ptr, this.slice.Distance, this.slice.Nozzle, item.Thickness, 
-                this.wallIdx[vol].ToArray(), pillerGeomid, vol, flag, 
+                this.wallIdx[vol].ToArray(), peelerGeomid, vol, flag, 
                 preX, preY, preZ, &lastX, &lastY, &lastZ,
                 preI, preJ, preK, &lastI, &lastJ, &lastK);
               preX = lastX;

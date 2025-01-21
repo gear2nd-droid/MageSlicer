@@ -85,7 +85,7 @@ namespace IE_WinForms
         this.numericPitch.Value = (decimal)pitch;
         this.comboDirection.Enabled = false;
       }
-      else if(this.type == NodePartType.PillerSurface)
+      else if(this.type == NodePartType.PeelerSurface)
       {
         this.labelPitch.Text = "Slice layer thickeness";
         this.numericPitch.Enabled = true;
@@ -158,7 +158,7 @@ namespace IE_WinForms
       OpenFileDialog ofd = new OpenFileDialog();
       ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
       if(this.type == NodePartType.SandwichVolume || this.type == NodePartType.BottomVolume || 
-        this.type == NodePartType.AutoSliceVolume || this.type == NodePartType.PillerSurface)
+        this.type == NodePartType.AutoSliceVolume || this.type == NodePartType.PeelerSurface)
       {
         ofd.FileName = "volume.step";
         ofd.Filter = "STEP file(*.step;*.stp)|*.step;*.stp";
