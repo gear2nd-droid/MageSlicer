@@ -9,6 +9,10 @@ MAGE slicerでは、NURBS曲面を用いて計算することで、高精度な�
 MAGEは、Multi Axis Generative Engineの略称です。
 その名の通り、多軸でのGコードを生成する処理を表しています。
 
+## MAGE Printer
+MAGE Printerは、MAGE Slicerに対応した5軸3Dプリンタです。
+[Kindle Direct Publishing](https://www.amazon.com/dp/B0DTGR7GW4)にて、製作方法をまとめた書籍を販売しております。
+
 # スライス手法
 MAGE slicerでは現在3種類のスライス方式に対応しています。
 
