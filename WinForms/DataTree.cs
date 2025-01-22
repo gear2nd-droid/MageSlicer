@@ -395,6 +395,8 @@ namespace IE_WinForms
               Console.WriteLine("Open file: " + Path.GetFileName(copyNode.Geometry.Path) + " (geometry id: " + copyNode.Geometry.Geomid + ")");
               copyNode.Geometry.usingCnt = 1;
               selectNode.Geometry = copyNode.Geometry.DeepCopy();
+              selectNode.IsExist = copyNode.IsExist;
+              selectNode.Text = copyNode.Text;
               this.geoms.Add(selectNode.Geometry);
             }
             else
