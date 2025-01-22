@@ -401,7 +401,7 @@ namespace IE_WinForms
             }
             else
             {
-              for(int i = 0; i < this.items.Count; i++)
+              for(int i = 0; i < this.geoms.Count; i++)
               {
                 if(copyNode.Geometry.Equals(this.geoms[i]))
                 {
