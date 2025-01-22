@@ -6,6 +6,8 @@ Multi-axis 3D printers offer greater flexibility in modeling by creating objects
 The MAGE slicer uses NURBS surfaces in its calculations to achieve highly accurate slicing on free-form surfaces.
 Therefore, in addition to 3D coordinates on the free-form surface, MAGE slicer also calculates normal vectors and spacing between layers to enable beautiful modeling.
 It can also be used for non-planar printing with a 3-axis 3D printer.
+[![Introduction to MAGE Slicer](https://github.com/user-attachments/assets/6f9fd819-9652-4816-a5ee-a30d5d493a75)](https://youtu.be/kq60ltlDD3I)
+[![How to use MAGE Slicer](https://github.com/user-attachments/assets/96aba426-1313-449f-9ffa-f8088192e729)](https://youtu.be/iwA_dqMPt50)
 
 ## What is MAGE?
 MAGE stands for Multi Axis Generative Engine.
@@ -208,6 +210,8 @@ MAGE slicerは、4軸以上の多軸の3Dプリンタ用の汎用スライサー
 MAGE slicerでは、NURBS曲面を用いて計算することで、高精度な自由曲面でのスライスを実現しています。
 そのため、自由曲面上での3次元座標に加え、法線ベクトルの計算や、層間の間隔なども併せて計算することで綺麗な造形を可能とします。
 なお、3軸の3Dプリンタで非平面印刷をするのにも活用できます。
+[![MAGE Slicerの紹介](https://github.com/user-attachments/assets/6f9fd819-9652-4816-a5ee-a30d5d493a75)](https://youtu.be/kq60ltlDD3I)
+[![MAGE Slicerの使い方](https://github.com/user-attachments/assets/96aba426-1313-449f-9ffa-f8088192e729)](https://youtu.be/iwA_dqMPt50)
 
 ## MAGEとは?
 MAGEは、Multi Axis Generative Engineの略称です。
