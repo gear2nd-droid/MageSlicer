@@ -182,13 +182,13 @@ public:
     double& lastNormI, double& lastNormJ, double& lastNormK,
     bool infillEnable, int infillType, double infillPercent, array<int>^ underInfillIdx,
     bool gapFillEnable, double gapFillPercent,
-    bool outerWallFlag, int numWall);
+    bool outerWallFlag, int numWall, double wallPercent);
   int getLayerCenter(int geomIdSurface, double& x, double& y, double& z);
   void DeleteSurfaceByTransparent(int id);
   void DeleteCurveByTransparent(int id);
   int OCCTProxy::calcBottomPoints(char* path, double pointsDistance, double width,
     array<int>^ surfaceIdx, array<int>^ wallIdx, array<int>^ infillIdx,
-    array<int>^ underIdx, int volumeCnt, int volumeGeomid, int numWall, int direction,
+    array<int>^ underIdx, int volumeCnt, int volumeGeomid, int numWall, double wallPercent, int direction,
     double prePointX, double prePointY, double prePointZ, 
     double& lastPointX, double& lastPointY, double& lastPointZ,
     double preNormI, double preNormJ, double preNormK,
@@ -203,7 +203,7 @@ public:
     int surfaceR, int surfaceG, int surfaceB);
   int OCCTProxy::calcPeelerLayer(
     array<int>^ surfaceIdx, array<int>^ wallIdx, array<int>^ infillIdx, array<int>^ supportIdx);
-  int OCCTProxy::calcPeelerPoints(char* path, double pointsDistance, double width, double thick,
+  int OCCTProxy::calcPeelerPoints(char* path, double pointsDistance, double width, double thick, double wallPercent,
     array<int>^ wallIdx, int peelerGeomid, int volumeCnt, bool flag,
     double prePointX, double prePointY, double prePointZ,
     double& lastPointX, double& lastPointY, double& lastPointZ,

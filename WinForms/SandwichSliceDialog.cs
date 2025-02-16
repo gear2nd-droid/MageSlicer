@@ -22,6 +22,7 @@ namespace IE_WinForms
     public double gapFillPercent { get; set; }
     public int wallCount { get; set; }
     public bool wallOffset {get; set; }
+    public double wallPercent { get; set; }
 
     public SandwichSliceDialog()
     {
@@ -42,7 +43,7 @@ namespace IE_WinForms
       this.comboBoxInfill.DropDownStyle = ComboBoxStyle.DropDownList;
       this.comboBoxInfill.Enabled = false;
       this.numericInfillPercent.DecimalPlaces = 0;
-      this.numericInfillPercent.Increment = 10M;
+      this.numericInfillPercent.Increment = 5M;
       this.numericInfillPercent.Minimum = 0M;
       this.numericInfillPercent.Maximum = 100M;
       this.numericInfillPercent.Enabled = false;
@@ -58,6 +59,12 @@ namespace IE_WinForms
       this.numericWall.Minimum = 1M;
       this.numericWall.Enabled = true;
       this.numericWall.Value = 1M;
+      this.numericWallPercent.DecimalPlaces = 0;
+      this.numericWallPercent.Increment = 5M;
+      this.numericWallPercent.Minimum = 50M;
+      this.numericWallPercent.Maximum = 200M;
+      this.numericWallPercent.Enabled = true;
+      this.numericWallPercent.Value = 100M;
     }
 
     private void numericPoints_ValueChanged(object sender, EventArgs e)
@@ -74,6 +81,7 @@ namespace IE_WinForms
       this.gapFillEnable = this.checkBoxGap.Checked;
       this.wallCount = (int)this.numericWall.Value;
       this.wallOffset = this.checkWallOffset.Checked;
+      this.wallPercent = (double)this.numericWallPercent.Value / 100.0;
       if(this.checkBoxInfill.Checked)
       {
         this.infillPercent = (double)this.numericInfillPercent.Value / 100.0;
@@ -147,6 +155,10 @@ namespace IE_WinForms
       {
         this.numericGapFill.Enabled = false;
       }
+    }
+
+    private void numericWall_ValueChanged(object sender, EventArgs e)
+    {
     }
   }
 }

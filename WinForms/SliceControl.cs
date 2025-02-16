@@ -562,7 +562,7 @@ namespace IE_WinForms
                   preI, preJ, preK, &lastI, &lastJ, &lastK,
                   this.slice.infillEnable, this.slice.infillType, this.slice.infillPercent, underInfill,
                   this.slice.gapFillEnable, this.slice.gapFillPercent,
-                  this.slice.wallOffset, this.slice.wallCount);
+                  this.slice.wallOffset, this.slice.wallCount, this.slice.wallPercent);
                 preX = lastX;
                 preY = lastY;
                 preZ = lastZ;
@@ -585,7 +585,7 @@ namespace IE_WinForms
             {
               this.view.myOCCTProxy.calcBottomPoints((sbyte*)ptr, this.slice.Distance, this.slice.Nozzle, 
                 this.surfaceIdx[vol].ToArray(), this.wallIdx[vol].ToArray(), this.infillIdx[vol].ToArray(), 
-                under, vol, volumeGeomid, this.slice.wallCount, item.Direction,
+                under, vol, volumeGeomid, this.slice.wallCount, this.slice.wallPercent, item.Direction,
                 preX, preY, preZ, &lastX, &lastY, &lastZ,
                 preI, preJ, preK, &lastI, &lastJ, &lastK);
               preX = lastX;
@@ -612,7 +612,7 @@ namespace IE_WinForms
               bool flag = true;
               if(item.Direction != 0) flag = false;
               this.view.myOCCTProxy.calcPeelerPoints(
-                (sbyte*)ptr, this.slice.Distance, this.slice.Nozzle, item.Thickness, 
+                (sbyte*)ptr, this.slice.Distance, this.slice.Nozzle, item.Thickness, this.slice.wallPercent, 
                 this.wallIdx[vol].ToArray(), peelerGeomid, vol, flag, 
                 preX, preY, preZ, &lastX, &lastY, &lastZ,
                 preI, preJ, preK, &lastI, &lastJ, &lastK);

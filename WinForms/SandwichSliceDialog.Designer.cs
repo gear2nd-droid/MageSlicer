@@ -50,6 +50,8 @@
       this.numericWall = new System.Windows.Forms.NumericUpDown();
       this.label7 = new System.Windows.Forms.Label();
       this.checkWallOffset = new System.Windows.Forms.CheckBox();
+      this.label8 = new System.Windows.Forms.Label();
+      this.numericWallPercent = new System.Windows.Forms.NumericUpDown();
       ((System.ComponentModel.ISupportInitialize)(this.numericPoints)).BeginInit();
       this.groupBox1.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.numericInfillPercent)).BeginInit();
@@ -57,11 +59,12 @@
       this.groupBox2.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.numericGapFill)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.numericWall)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.numericWallPercent)).BeginInit();
       this.SuspendLayout();
       // 
       // numericPoints
       // 
-      this.numericPoints.Location = new System.Drawing.Point(102, 39);
+      this.numericPoints.Location = new System.Drawing.Point(116, 39);
       this.numericPoints.Name = "numericPoints";
       this.numericPoints.Size = new System.Drawing.Size(120, 19);
       this.numericPoints.TabIndex = 0;
@@ -200,7 +203,7 @@
       // 
       // numericNozzle
       // 
-      this.numericNozzle.Location = new System.Drawing.Point(102, 64);
+      this.numericNozzle.Location = new System.Drawing.Point(116, 63);
       this.numericNozzle.Name = "numericNozzle";
       this.numericNozzle.Size = new System.Drawing.Size(120, 19);
       this.numericNozzle.TabIndex = 9;
@@ -256,10 +259,11 @@
       // 
       // numericWall
       // 
-      this.numericWall.Location = new System.Drawing.Point(102, 89);
+      this.numericWall.Location = new System.Drawing.Point(116, 88);
       this.numericWall.Name = "numericWall";
       this.numericWall.Size = new System.Drawing.Size(120, 19);
       this.numericWall.TabIndex = 11;
+      this.numericWall.ValueChanged += new System.EventHandler(this.numericWall_ValueChanged);
       // 
       // label7
       // 
@@ -273,12 +277,28 @@
       // checkWallOffset
       // 
       this.checkWallOffset.AutoSize = true;
-      this.checkWallOffset.Location = new System.Drawing.Point(228, 91);
+      this.checkWallOffset.Location = new System.Drawing.Point(242, 90);
       this.checkWallOffset.Name = "checkWallOffset";
       this.checkWallOffset.Size = new System.Drawing.Size(142, 16);
       this.checkWallOffset.TabIndex = 12;
       this.checkWallOffset.Text = "Offset to inside of wall";
       this.checkWallOffset.UseVisualStyleBackColor = true;
+      // 
+      // label8
+      // 
+      this.label8.AutoSize = true;
+      this.label8.Location = new System.Drawing.Point(12, 118);
+      this.label8.Name = "label8";
+      this.label8.Size = new System.Drawing.Size(91, 12);
+      this.label8.TabIndex = 10;
+      this.label8.Text = "Pitch percentage";
+      // 
+      // numericWallPercent
+      // 
+      this.numericWallPercent.Location = new System.Drawing.Point(116, 114);
+      this.numericWallPercent.Name = "numericWallPercent";
+      this.numericWallPercent.Size = new System.Drawing.Size(120, 19);
+      this.numericWallPercent.TabIndex = 11;
       // 
       // SandwichSliceDialog
       // 
@@ -286,7 +306,9 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(425, 381);
       this.Controls.Add(this.checkWallOffset);
+      this.Controls.Add(this.numericWallPercent);
       this.Controls.Add(this.numericWall);
+      this.Controls.Add(this.label8);
       this.Controls.Add(this.label7);
       this.Controls.Add(this.label5);
       this.Controls.Add(this.numericNozzle);
@@ -310,6 +332,7 @@
       this.groupBox2.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.numericGapFill)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.numericWall)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.numericWallPercent)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -339,5 +362,7 @@
     private System.Windows.Forms.NumericUpDown numericWall;
     private System.Windows.Forms.Label label7;
     private System.Windows.Forms.CheckBox checkWallOffset;
+    private System.Windows.Forms.Label label8;
+    private System.Windows.Forms.NumericUpDown numericWallPercent;
   }
 }
