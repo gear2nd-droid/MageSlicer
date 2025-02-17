@@ -126,6 +126,12 @@ int OCCTProxy::calcLayer(int layerCnt,
   fclose(stdin);
   fclose(stderr);
   FreeConsole();
+
+  // memory
+  delete[] surface;
+  delete[] face;
+  delete[] dispSurface;
+
 	return layerCnt;
 }
 
@@ -663,7 +669,20 @@ int OCCTProxy::calcPoints(char* path, int layerCnt, double pointsDistance, doubl
   fclose(stdout);
   fclose(stdin);
   fclose(stderr);
-  //FreeConsole();
+  FreeConsole();
+
+  // memory
+  delete[] surfaces;
+  delete[] dispEdgeCnt;
+  delete[] wallCurves;
+  delete[] wallFaces;
+  delete[] wallVolumes;
+  delete[] wallDatas;
+  delete[] infillDatas;
+  delete[] gapFillDatas;
+  delete[] offsetUvLib;
+  delete[] real2uvLib;
+  delete[] loopLastIdxLib;
 
   return 0;
 }
@@ -884,7 +903,14 @@ int OCCTProxy::calcBottomPoints(char* path, double pointsDistance, double width,
   fclose(stdout);
   fclose(stdin);
   fclose(stderr);
-  //FreeConsole();
+  FreeConsole();
+
+  // memory
+  delete[] surfaces;
+  delete[] dispEdgeCnt;
+  delete[] wallCurves;
+  delete[] wallFaces;
+  delete[] wallVolumes;
 
   return 0;
 }
@@ -981,6 +1007,12 @@ int OCCTProxy::calcBottomLayer(
   fclose(stdin);
   fclose(stderr);
   FreeConsole();
+
+  // memory
+  delete[] surface;
+  delete[] face;
+  delete[] dispSurface;
+
   return layerCnt;
 }
 
@@ -1278,7 +1310,13 @@ int OCCTProxy::calcAutoSliceLayer(
   fclose(stdout);
   fclose(stdin);
   fclose(stderr);
-  //FreeConsole();
+  FreeConsole();
+
+  // memory
+  delete[] surface;
+  delete[] face;
+  delete[] dispSurface;
+
   return layerCnt;
 }
 
@@ -1504,7 +1542,9 @@ int OCCTProxy::calcPeelerPoints(char* path, double pointsDistance, double width,
   fclose(stdout);
   fclose(stdin);
   fclose(stderr);
-  //FreeConsole();
+  FreeConsole();
+
+  // memory
 
   return 0;
 }
